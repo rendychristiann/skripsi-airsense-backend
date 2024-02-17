@@ -51,6 +51,8 @@ const create = (request, response, next) => {
     PM25: body.PM25,
     CO: body.CO,
     CO2: body.CO2,
+    SNR: body.SNR,
+    RSSI: body.RSSI,
     timestamp: times,
     dateValue: dates,
   });

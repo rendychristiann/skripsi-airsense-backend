@@ -5,6 +5,8 @@ const dbSchema = new mongoose.Schema({
   PM25: { type: Number, required: true },
   CO: { type: Number, required: true },
   CO2: { type: Number, required: true },
+  SNR: { type: Number, required: true},
+  RSSI: { type:Number, required: true},
   timestamp: { type: String, required: true},
   dateValue: { type: Date, required: true},
 });
