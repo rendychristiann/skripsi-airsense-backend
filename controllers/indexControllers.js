@@ -28,7 +28,7 @@ const info = (request, response) => {
   const date = new Date();
   airIndex.count().then((count) => {
     return response.send(
-      `<h2>Phonebook has info for ${count} people</h2><br/><p>${date}</p>`
+      `<h2>Air Index has info for ${count}</h2><br/><p>${date}</p>`
     );
   });
 };
@@ -49,8 +49,6 @@ const create = (request, response, next) => {
   const dates = moment().tz("Asia/Jakarta").format("YYYY-MM-DD");
   const indexData = new airIndex({
     PM25: body.PM25,
-    CO: body.CO,
-    CO2: body.CO2,
     SNR: body.SNR,
     RSSI: body.RSSI,
     timestamp: times,
