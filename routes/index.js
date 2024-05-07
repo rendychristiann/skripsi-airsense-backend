@@ -7,6 +7,6 @@ router.get("/info", indexControllers.info);
 router.get("/", (request, response) => {
     response.send('<h1>Hello World!</h1>')
 });
-
+router.get("/allValue", indexControllers.allIndex);
 router.use("/api", indexRoutes);
 module.exports = router;

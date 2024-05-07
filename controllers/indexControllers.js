@@ -13,7 +13,7 @@ const index = (request, response) => {
 
 const allIndex = (request, response) => {
   airIndex
-    .find()
+    .find({})
     .then((allValue) => {
       return response.json(allValue);
     })
