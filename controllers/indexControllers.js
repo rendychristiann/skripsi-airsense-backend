@@ -11,6 +11,18 @@ const index = (request, response) => {
     });
 };
 
+const allIndex = (request, response) => {
+  airIndex
+    .find()
+    .then((allValue) => {
+      return response.json(allValue);
+    })
+    .catch((error) => {
+      console.error('Error fetching data: ', error);
+      response.status(500).json({error: 'Failed to fetch data'});
+    });
+};
+
 const show = (request, response, next) => {
   airIndex
     .findById(request.params.id)
@@ -70,4 +82,5 @@ module.exports = {
   show,
   info,
   deleteById,
+  allIndex
 };
