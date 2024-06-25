@@ -5,6 +5,7 @@ const logger = require("./utils/logger");
 const routes = require("./routes/index")
 const middleware = require("./utils/middleware")
 const { default: mongoose } = require("mongoose");
+require('dotenv').config();
 
 const app = express();
 

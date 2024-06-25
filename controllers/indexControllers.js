@@ -1,5 +1,20 @@
 const airIndex = require("../models/schema");
 const moment = require("moment-timezone");
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+
+function sendWhatsApp(message) {
+  client.messages
+    .create({
+      from: process.env.WHATSAPP_FROM,
+      body: message,
+      to: process.env.WHATSAPP_TO
+    })
+    .then(result => console.log(`Pesan WhatsApp terkirim dengan SID: ${result.sid}`))
+    .catch(err => console.error(`Error: ${err.message}`))
+    .done();
+}
 
 const index = (request, response) => {
   const today = moment().tz("Asia/Jakarta").format("YYYY-MM-DD");
@@ -71,10 +86,15 @@ const create = (request, response, next) => {
     .save()
     .then((result) => {
       console.log("Add new value successfull");
+      const threshold = 150;
+      if (body.PM25 > threshold) {
+        sendWhatsApp(`Indeks PM2.5 saat ini: ${result.PM25}. Udara tidak sehat, gunakan masker ketika ke luar ruangan!`);
+      }
       return response.status(201).json(result);
     })
     .catch((error) => next(error));
 };
+
 
 module.exports = {
   create,
